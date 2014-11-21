@@ -34,8 +34,8 @@ RUN pip install --install-option="--prefix=/var/lib/graphite" --install-option="
 
 # Install Grafana
 RUN mkdir /src/grafana && cd /src/grafana &&\
- wget http://grafanarel.s3.amazonaws.com/grafana-1.8.1.tar.gz &&\
- tar xzvf grafana-1.8.1.tar.gz --strip-components=1 && rm grafana-1.8.1.tar.gz
+ wget http://grafanarel.s3.amazonaws.com/grafana-1.9.0-rc1.tar.gz &&\
+ tar xzvf grafana-1.9.0-rc1.tar.gz --strip-components=1 && rm grafana-1.9.0-rc1.tar.gz
 
 # Configure Elasticsearch
 ADD ./elasticsearch/run /usr/local/bin/run_elasticsearch
@@ -80,9 +80,5 @@ EXPOSE 9200
 EXPOSE 8125/udp
 EXPOSE 8126
 
-
-VOLUME ["/var/lib/elasticsearch"]
-VOLUME ["/opt/graphite/storage/whisper"]
-VOLUME ["/var/lib/log/supervisor"]
 
 CMD ["/usr/bin/supervisord"]
