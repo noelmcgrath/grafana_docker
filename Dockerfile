@@ -19,11 +19,15 @@ RUN apt-get -y install nodejs
 RUN apt-get -y install openjdk-7-jre
 
 # Install Elasticsearch
-RUN cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.0.deb
-RUN cd ~ && dpkg -i elasticsearch-1.4.0.deb && rm elasticsearch-1.4.0.deb
+RUN mkdir /src && cd /src &&\
+ wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.0.tar.gz &&\
+ tar xvzf elasticsearch-1.4.0.tar.gz && mv elasticsearch-1.4.0 elasticsearch &&\
+ rm -f elasticsearch-1.4.0.tar.gz
+RUN useradd elasticsearch --password elasticsearch
+RUN chown -R elasticsearch:elasticsearch /src/elasticsearch
 
 # Install StatsD
-RUN mkdir /src && git clone https://github.com/etsy/statsd.git /src/statsd
+RUN git clone https://github.com/etsy/statsd.git /src/statsd
 
 # Install Whisper, Carbon and Graphite-Web
 RUN pip install Twisted==11.1.0
@@ -39,8 +43,9 @@ RUN mkdir /src/grafana && cd /src/grafana &&\
 
 # Configure Elasticsearch
 ADD ./elasticsearch/run /usr/local/bin/run_elasticsearch
-RUN chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
-RUN mkdir -p /tmp/elasticsearch && chown elasticsearch:elasticsearch /tmp/elasticsearch
+#ADD ./elasticsearch/elasticsearch.yml /usr/local/bin/run_elasticsearch
+#RUN chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
+#RUN mkdir -p /tmp/elasticsearch && chown elasticsearch:elasticsearch /tmp/elasticsearch
 
 # Confiure StatsD
 ADD ./statsd/config.js /src/statsd/config.js

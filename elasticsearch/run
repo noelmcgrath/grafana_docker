@@ -11,7 +11,7 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 NAME=elasticsearch
 DESC="Elasticsearch Server"
-DEFAULT=/etc/default/$NAME
+DEFAULT=/src/$NAME
 
 . /lib/lsb/init-functions
 
@@ -38,7 +38,7 @@ done
 export JAVA_HOME
 
 # Directory where the Elasticsearch binary distribution resides
-ES_HOME=/usr/share/$NAME
+ES_HOME=/src/$NAME
 
 # Heap Size (defaults to 256m min, 1g max)
 #ES_HEAP_SIZE=2g
@@ -59,16 +59,16 @@ MAX_OPEN_FILES=65535
 #MAX_LOCKED_MEMORY=
 
 # Elasticsearch log directory
-LOG_DIR=/var/log/$NAME
+LOG_DIR=$ES_HOME/logs
 
 # Elasticsearch data directory
-DATA_DIR=/var/lib/$NAME
+DATA_DIR=$ES_HOME/data
 
 # Elasticsearch work directory
-WORK_DIR=/tmp/$NAME
+#WORK_DIR=/tmp/$NAME
 
 # Elasticsearch configuration directory
-CONF_DIR=/etc/$NAME
+CONF_DIR=$ES_HOME/config
 
 # Elasticsearch configuration file (elasticsearch.yml)
 CONF_FILE=$CONF_DIR/elasticsearch.yml

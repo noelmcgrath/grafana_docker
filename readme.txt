@@ -40,11 +40,14 @@ graphite https://github.com/nickstenning/docker-graphite
 
 # Create a data container - 2 volumes /data and /var/lib/graphite/storage/whisper
 docker run -i -t --name metrics_data1 -v /var/lib/graphite/storage/whisper busybox /bin/sh
+docker run -i -t --name metrics_data23 -v /var/lib/graphite/storage/whisper -v /src/elasticsearch/data -v /src/elasticsearch/logs busybox /bin/basha
+
+docker run -i -t --name metrics_data12 -v /var/lib/graphite/storage/whisper -v /src/elast busybox /bin/sh
 docker run --name metrics_data3 -v /data -v /var/lib/elasticsearch -v /var/lib/graphite/storage/whisper busybox true
 
 # Run docker worker 1 that can see the volumes from nmcg_data data container
 docker build -t nmcg/grafana:1.0 .
-docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana --volumes-from metrics_data2 nmcg/grafana:2.0
+docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana --volumes-from metrics_data12 nmcg/grafana:2.0
 
 docker run -d -p 9200:9200 -p 9300:9300 -v <data-dir>:/data dockerfile/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
 
