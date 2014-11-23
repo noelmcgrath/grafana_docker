@@ -43,9 +43,7 @@ RUN mkdir /src/grafana && cd /src/grafana &&\
 
 # Configure Elasticsearch
 ADD ./elasticsearch/run /usr/local/bin/run_elasticsearch
-#ADD ./elasticsearch/elasticsearch.yml /usr/local/bin/run_elasticsearch
-#RUN chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
-#RUN mkdir -p /tmp/elasticsearch && chown elasticsearch:elasticsearch /tmp/elasticsearch
+ADD ./elasticsearch/elasticsearch.yml /src/elasticsearch/config/elasticsearch.yml
 
 # Confiure StatsD
 ADD ./statsd/config.js /src/statsd/config.js
