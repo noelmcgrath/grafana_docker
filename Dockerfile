@@ -5,10 +5,10 @@
 FROM ubuntu:14.04
 RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty universe' >> /etc/apt/sources.list
 RUN apt-get -y update
-RUN apt-get -y upgrade
 
 # Prerequisites
-RUN apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support python-pip gunicorn python-dev libpq-dev build-essential
+RUN apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support python-pip gunicorn python-dev libpq-dev build-essential python-django python-twisted
+
 RUN apt-get -y install supervisor nginx-light git wget curl
 # Node
 RUN apt-get -y install software-properties-common
@@ -30,8 +30,6 @@ RUN chown -R elasticsearch:elasticsearch /src/elasticsearch
 RUN git clone https://github.com/etsy/statsd.git /src/statsd
 
 # Install Whisper, Carbon and Graphite-Web
-RUN pip install Twisted==11.1.0
-RUN pip install Django==1.5
 RUN pip install whisper
 RUN pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/lib" carbon
 RUN pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/webapp" graphite-web

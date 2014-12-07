@@ -36,8 +36,8 @@ docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 -
 
 # host volume
 docker build -t nmcg/grafana:1.0 .
-docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana1 -v /vagrant/noeltest:/data nmcg/grafana:1.0
-docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana1 -v /vagrant/noeltest:/data -v /vagrant/noeltest:/var/lib/graphite/storage/whisper nmcg/grafana:1.0
+docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana1 -v /vagrant/noeltest1:/data nmcg/grafana:1.0
+docker run -d -p 80:80 -p 8000:8000 -p 9200:9200 -p 8125:8125/udp -p 8126:8126 --name nmcg_grafana1 -v /vagrant/noeltest1:/data -v /vagrant/noeltest1:/var/lib/graphite/storage/whisper nmcg/grafana:1.0
 
 
 # Run docker worker 1 that can see the volumes from nmcg_data data container
