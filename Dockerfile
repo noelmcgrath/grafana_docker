@@ -7,7 +7,11 @@ RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty universe' >> /etc/apt/
 RUN apt-get -y update
 
 # Prerequisites
-RUN apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support python-pip gunicorn python-dev libpq-dev build-essential python-django python-twisted
+RUN apt-get -y install python-django-tagging python-simplejson python-memcache python-ldap python-cairo python-pysqlite2 python-support python-pip gunicorn python-dev libpq-dev build-essential 
+# Why wont this work??
+#python-django python-twisted
+RUN pip install Twisted==11.1.0
+RUN pip install Django==1.5
 
 RUN apt-get -y install supervisor nginx-light git wget curl
 # Node
