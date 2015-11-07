@@ -1,5 +1,5 @@
 StatsD + Graphite + Grafana + Elasticsearch
----------------------------------------------
+----------------------------------------------
 This is based of [cazcade](https://registry.hub.docker.com/u/cazcade/docker-grafana-graphite/dockerfile/)
 This image contains a sensible default configuration of StatsD, Graphite Grafana and Elasticsearch.
 The is also a vagrant file for running locally for testing things out
